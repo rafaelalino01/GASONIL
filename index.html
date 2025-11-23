@@ -3,85 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GÁSONIL - Peça seu Gás Online</title>
+    <title>GASONIL - Peça seu Gás Online</title>
 
-    <!-- Estilos -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Favicon (coloque o arquivo em /public/flavicon.png) -->
     <link rel="icon" type="image/png" href="assets/icons/flavicon.png">
-
 </head>
 <body>
 
-    <header class="header">
+<header class="header">
     <div class="logo">
-        <img src="assets/icons/logo.png" alt="Logo Gásonil" class="logo-icon">
-        <span class="logo-text">GÁSO<span class="logo-nil">NIL</span></span>
+        <img src="assets/icons/logo.png" alt="Logo Gasonil" class="logo-icon">
+        <span class="logo-text">GÁS<span class="logo-nil">ONIL</span></span>
     </div>
     <nav class="nav-menu">
         <a href="#" id="meus-pedidos" class="nav-item">
             <img src="assets/icons/pedidos.png" alt="Meus Pedidos">
             <span>Meus Pedidos</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="#" id="btn-ajuda" class="nav-item">
             <img src="assets/icons/ajuda.png" alt="Ajuda">
             <span>Ajuda</span>
         </a>
         <a href="#" class="nav-item">
             <img src="assets/icons/location.png" alt="Localização">
-            <span>(Localização)</span>
+            <span>Localização</span>
         </a>
     </nav>
 </header>
 
-
-    <main class="hub-container">
+<main class="hub-container">
+    <section class="hero-section">
+        <h1 class="hero-title">
+            Seu gás, entregue na hora. Simples assim.
+        </h1>
+        <div class="search-bar-wrapper">
+            <input type="text" id="cep-input" placeholder="Digite seu CEP (apenas números)" class="search-input">
+            <button id="search-btn" class="btn-primary">Buscar endereço</button>
+        </div>
         
-        <section class="hero-section">
-            <h1 class="hero-title">
-                Seu gás, entregue na hora. Simples assim.
-            </h1>
-            <div class="search-bar-wrapper">
-                <input type="text" placeholder="Digite seu CEP ou Endereço" class="search-input">
-                <button class="btn-primary">Pedir Gás</button>
-            </div>
-        </section>
+        <div id="address-result" style="margin-top: 20px; font-size: 16px; font-weight: 600; color: var(--color-navy, #333);">
+        </div>
 
-        <section class="product-grid">
+    </section>
+
+    <section class="product-grid">
+        <div class="product-card">
+            <div class="product-icon-wrapper">
+                <img src="assets/icons/p13-gas.png" alt="Botijão P13" class="product-icon">
+            </div>
+            <p class="product-name">P13</p>
+            <p class="product-price">R$ 94,99</p>
+            <button class="btn-secondary">Adicionar</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon-wrapper">
+                <img src="assets/icons/p20-gas.png" alt="Botijão P20" class="product-icon">
+            </div>
+            <p class="product-name">P20</p>
+            <p class="product-price">R$ 104,99</p>
+            <button class="btn-secondary">Adicionar</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icon-wrapper">
+                <img src="assets/icons/p45-gas.png" alt="Botijão P45" class="product-icon">
+            </div>
+            <p class="product-name">P45</p>
+            <p class="product-price">R$ 119,99</p>
+            <button class="btn-secondary">Adicionar</button>
+        </div>
+    </section>
+</main>
+
+<div id="address-detail-modal" class="cart-modal hidden">
+    <div class="cart-content">
+        <header class="cart-header">
+            <h2>Detalhes da Entrega</h2>
+            <button id="close-address-detail" class="close-btn">&times;</button>
+        </header>
+        <div class="cart-items">
+            <p style="margin-bottom: 15px;">**O seu CEP foi validado!** Por favor, complete as informações:</p>
             
-            <div class="product-card">
-                <div class="product-icon-wrapper">
-                    <img src="assets/icons/p13-gas.png" alt="Botijão P13" class="product-icon">
-                </div>
-                <p class="product-name">P13</p>
-                <p class="product-price">R$ 94,99</p>
-                <button class="btn-secondary">Adicionar</button>
+            <div style="margin-bottom: 10px;">
+                <label for="address-number-input" style="font-weight: 600;">Número da Residência (Obrigatório):</label>
+                <input type="text" id="address-number-input" required>
             </div>
 
-            <div class="product-card">
-                <div class="product-icon-wrapper">
-                    <img src="assets/icons/p20-gas.png" alt="Botijão P20" class="product-icon">
-                </div>
-                <p class="product-name">P20</p>
-                <p class="product-price">R$ 104,99</p>
-                <button class="btn-secondary">Adicionar</button>
+            <div style="margin-bottom: 10px;">
+                <label for="address-complement-input" style="font-weight: 600;">Complemento (Ex: Apt 101, Fundos):</label>
+                <input type="text" id="address-complement-input">
             </div>
 
-            <div class="product-card">
-                <div class="product-icon-wrapper">
-                    <img src="assets/icons/p45-gas.png" alt="Botijão P45" class="product-icon">
-                </div>
-                <p class="product-name">P45</p>
-                <p class="product-price">R$ 119,99</p>
-                <button class="btn-secondary">Adicionar</button>
+            <div style="margin-bottom: 15px;">
+                <label for="address-reference-input" style="font-weight: 600;">Ponto de Referência (Opcional):</label>
+                <input type="text" id="address-reference-input">
             </div>
 
-        </section>
+        </div>
+        <footer class="cart-footer" style="justify-content: center;">
+            <button id="save-address-btn" class="btn-primary">Salvar Endereço e Continuar</button>
+        </footer>
+    </div>
+</div>
 
-    </main>
-<!-- Modal do Carrinho -->
 <div id="cart-modal" class="cart-modal hidden">
     <div class="cart-content">
         <header class="cart-header">
@@ -89,23 +116,57 @@
             <button id="close-cart" class="close-btn">&times;</button>
         </header>
         <ul id="cart-items" class="cart-items">
-            <!-- Produtos adicionados aparecerão aqui -->
-        </ul>
-        <footer class="cart-footer">
+            </ul>
+        
+        <div class="payment-details" style="border-top: 1px solid var(--color-border-light); padding-top: 15px; margin-bottom: 15px;">
+            <h3 style="color: var(--color-navy); font-size: 18px; margin-bottom: 10px; text-align: left;">
+                💰 Forma de Pagamento
+            </h3>
+            
+            <select id="payment-method" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--color-border-light); margin-bottom: 10px; font-size: 16px;">
+                <option value="cartao">Cartão de Crédito/Débito (Máquina)</option>
+                <option value="pix">PIX</option>
+                <option value="dinheiro">Dinheiro</option>
+            </select>
+            
+            <div id="troco-wrapper" class="hidden" style="margin-top: 10px; text-align: left;">
+                <label for="valor-pagamento" style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 5px;">
+                    Troco para qual valor?
+                </label>
+                <input type="number" id="valor-pagamento" placeholder="Ex: 50.00" 
+                       style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--color-border-light);" min="0.01">
+            </div>
+        </div>
+        <div class="cart-footer">
             <p>Total: <span id="cart-total">R$ 0,00</span></p>
             <button id="checkout-btn" class="btn-primary">Finalizar via WhatsApp</button>
-        </footer>
-        <footer class="cart-footer">
-    <button id="continue-btn" class="btn-secondary">Continuar Comprando</button>
-    <p>Total: <span id="cart-total">R$ 0,00</span></p>
-    <button id="checkout-btn" class="btn-primary">Finalizar via WhatsApp</button>
-</footer>
-
+            <button id="continue-btn" style="background: none; color: var(--color-navy); border: 1px solid var(--color-navy);">Continuar Comprando</button>
+        </div>
     </div>
 </div>
 
-<!-- Script do Carrinho -->
-<script src="cart.js"></script>
+<div id="help-modal" class="cart-modal hidden">
+    <div class="cart-content">
+        <header class="cart-header">
+            <h2>Como Pedir Seu Gás 💬</h2>
+            <button id="close-help-modal" class="close-btn">&times;</button>
+        </header>
+        <div class="cart-items">
+            <ol style="padding-left: 15px;">
+                <li>**1. Localização:** Digite seu **CEP** na barra de busca e clique em "Buscar endereço".</li>
+                <li>**2. Detalhes:** Informe o **número e complementos** para finalizar o endereço.</li>
+                <li>**3. Escolha:** Clique em **"Adicionar"** no botijão desejado (P13, P20, P45).</li>
+                <li>**4. Finalizar:** Clique no **carrinho** e finalize via WhatsApp.</li>
+            </ol>
+            <p style="margin-top: 20px; font-size: 14px; text-align: center;">Se precisar de ajuda extra, envie mensagem para **(31) 99930-6022**.</p>
+        </div>
+        <footer class="cart-footer" style="justify-content: center;">
+            <button id="return-to-hub-btn" class="btn-primary">Voltar ao Hub</button>
+        </footer>
+    </div>
+</div>
+
+<script src="cart.js" defer></script>
 
 </body>
 </html>

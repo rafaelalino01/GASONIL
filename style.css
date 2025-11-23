@@ -5,6 +5,8 @@
     --color-blue-end: #3B9AE1;
     --color-background-light: #F8F9FA;
     --color-text-dark: #343A40;
+    --color-modal-background: #ffffff;
+    --color-border-light: #ddd;
 }
 
 /* Reset Básico e Fonte */
@@ -117,6 +119,8 @@ body {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     outline: none;
+    /* Borda padrão */
+    border: 1px solid var(--color-border-light);
 }
 
 /* 3. Botões */
@@ -137,6 +141,7 @@ body {
 }
 
 .btn-secondary {
+    /* Estilo padrão usado nos cards */
     border-radius: 5px;
     font-size: 14px;
     margin-top: 15px;
@@ -217,175 +222,169 @@ body {
 }
 
 /* =====================================================
-   📱📱📱 RESPONSIVIDADE MOBILE
-   ===================================================== */
+    5. Estilos de Modal (Carrinho, Ajuda e Endereço) 🛒/💬/🏠
+    ===================================================== */
 
-/* Tablets */
-@media (max-width: 992px) {
-    .header {
-        padding: 20px;
-    }
-
-    .logo-icon {
-        width: 65px;
-        height: 65px;
-    }
-
-    .hero-title {
-        font-size: 32px;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Celulares grandes */
-@media (max-width: 768px) {
-
-    /* Header empilha melhor */
-    .header {
-        padding: 15px 20px;
-    }
-
-    .nav-menu {
-        gap: 20px;
-    }
-
-    .logo-text {
-        font-size: 22px;
-    }
-
-    .logo-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    /* Cards 2 colunas */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .product-card {
-        padding: 20px;
-    }
-}
-
-/* Celulares pequenos */
-@media (max-width: 540px) {
-
-    /* Header totalmente compacto */
-    .header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .nav-menu {
-        width: 100%;
-        justify-content: center;
-        gap: 25px;
-    }
-
-    .hero-title {
-        font-size: 26px;
-        padding: 0 10px;
-    }
-
-    .search-bar-wrapper {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .search-input {
-        max-width: 100%;
-        border-radius: 10px;
-    }
-
-    .btn-primary {
-        width: 100%;
-        border-radius: 10px;
-        margin-top: 10px;
-    }
-
-    /* Cards 1 coluna */
-    .product-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .product-card {
-        padding: 25px;
-    }
-
-    .product-icon-wrapper {
-        width: 100px;
-        height: 100px;
-    }
-
-    .product-icon {
-        width: 70px;
-        height: 70px;
-    }
-
-    .product-name {
-        font-size: 18px;
-    }
-
-    .product-price {
-        font-size: 16px;
-    }
-   /* Modal do Carrinho */
 .cart-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
+    background-color: rgba(0,0,0,0.7); 
+    
+    /* Estado inicial: Invisível, controlado pelo JS e pela classe 'hidden' */
+    display: none; 
+    
     justify-content: center;
-    align-items: center; /* centraliza verticalmente */
+    align-items: center;
     z-index: 1000;
-    padding: 20px; /* espaço nas laterais */
+    padding: 20px;
+}
+
+.cart-modal:not(.hidden) {
+    display: flex; 
 }
 
 .cart-modal.hidden {
-    display: none;
+    display: none !important; 
 }
 
 .cart-content {
-    background-color: #fff;
+    background-color: var(--color-modal-background);
     width: 100%;
-    max-width: 450px; /* maior no desktop */
+    max-width: 450px;
     border-radius: 15px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    max-height: 90vh; /* limita altura da viewport */
-    overflow-y: auto; /* permite scroll interno se necessário */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-/* Header e Footer do modal */
+/* Header do modal */
 .cart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--color-border-light);
     padding-bottom: 10px;
+}
+
+.cart-header h2 {
+    color: var(--color-navy);
+    font-weight: 700;
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 28px; 
+    color: var(--color-text-dark);
     cursor: pointer;
+    line-height: 1; 
+    padding: 0;
+    transition: color 0.2s;
 }
 
+.close-btn:hover {
+    color: var(--color-cyan-start);
+}
+
+/* -----------------------------------------------------
+   ESTILO CORRIGIDO E REFINADO: INPUTS NO MODAL DE ENDEREÇO
+   ----------------------------------------------------- */
+
+/* Seleciona as DIVs dentro de .cart-items que envolvem os inputs do modal de endereço */
+#address-detail-modal .cart-items > div {
+    position: relative; 
+    margin-bottom: 15px; 
+}
+
+/* Estilo Base do Input (Aplicado a TODOS os inputs de texto no modal de detalhes) */
+#address-detail-modal input[type="text"],
+#address-detail-modal input:not([type]),
+#cart-modal input[type="number"] {
+    width: 100%; 
+    padding: 10px 15px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    outline: none;
+    box-shadow: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--color-modal-background);
+    
+    position: relative; 
+    z-index: 2;
+    margin-top: 5px; 
+}
+
+/* Pseudo-elemento (a Borda Animada) - ATIVADA APENAS NO FOCO */
+#address-detail-modal .cart-items > div:focus-within::after {
+    content: "";
+    position: absolute;
+    top: -2px; 
+    bottom: -2px;
+    left: -2px;
+    right: -2px; 
+    border-radius: 10px; 
+    
+    background: linear-gradient(
+        120deg, 
+        var(--color-cyan-start), 
+        var(--color-blue-end), 
+        var(--color-cyan-start)
+    );
+    
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    background-size: 300% 300%;
+    animation: gradientShift 2s ease-in-out infinite alternate;
+    
+    z-index: 1; 
+}
+
+/* Estado de Foco do Input */
+#address-detail-modal input[type="text"]:focus,
+#address-detail-modal input:not([type]):focus {
+    border-color: transparent; 
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); 
+}
+
+/* Keyframes para a borda animada */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Corpo do Modal de Ajuda (Conteúdo textual) */
+#help-modal .cart-items {
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+}
+
+#help-modal .cart-items ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    padding: 10px 0;
+}
+
+#help-modal .cart-items li {
+    border-bottom: none; 
+    margin-bottom: 8px;
+    padding: 0;
+    display: list-item;
+}
+
+/* Itens do Carrinho (Modal de Carrinho) */
 .cart-items {
     list-style: none;
     padding: 0;
@@ -429,19 +428,31 @@ body {
     height: 28px;
 }
 
+
+/* Footer do Modal */
 .cart-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 700;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
+    border-top: 1px solid var(--color-border-light);
+    padding-top: 15px;
     gap: 10px;
 }
 
+.cart-footer p {
+    flex-grow: 1;
+    text-align: left;
+    font-size: 18px;
+    color: var(--color-navy);
+}
+
+/* Botões do Footer (Aplicado a todos os Modals) */
 #checkout-btn,
-#continue-btn {
-    padding: 10px 20px;
+#continue-btn,
+#return-to-hub-btn,
+#save-address-btn { 
+    padding: 10px 15px; 
     border-radius: 8px;
     background: linear-gradient(to right, var(--color-blue-end), var(--color-cyan-start));
     color: white;
@@ -449,42 +460,183 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap; 
+    font-size: 14px;
 }
 
 #checkout-btn:hover,
-#continue-btn:hover {
+#continue-btn:hover,
+#return-to-hub-btn:hover,
+#save-address-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 196, 167, 0.4);
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
+/* Estilo específico para o botão de Retorno ao Hub no modal de Ajuda */
+#help-modal .cart-footer {
+    justify-content: center;
+}
+
+#help-modal #return-to-hub-btn {
+    width: 100%;
+    max-width: 250px;
+    padding: 12px 20px;
+    background: linear-gradient(to right, var(--color-blue-end), var(--color-cyan-start));
+    
+}
+
+#help-modal #return-to-hub-btn:hover {
+    box-shadow: 0 4px 10px rgba(27, 38, 59, 0.4);
+}
+
+/* Estilo para ocultar o troco */
+.hidden {
+    display: none !important;
+}
+
+/* =====================================================
+    📱📱📱 RESPONSIVIDADE MOBILE
+    ===================================================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+    .header {
+        padding: 20px;
+    }
+
+    .logo-icon {
+        width: 65px;
+        height: 65px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Celulares grandes */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .logo-text {
+        font-size: 22px;
+    }
+
+    .logo-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .product-card {
+        padding: 20px;
+    }
+
+    /* Footer do Modal - Quebra para alinhar verticalmente em telas menores */
+    .cart-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cart-footer p {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    #checkout-btn,
+    #continue-btn,
+    #return-to-hub-btn,
+    #save-address-btn {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    #help-modal .cart-footer {
+        flex-direction: column;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 540px) {
+    /* Header totalmente compacto */
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: space-around; 
+        gap: 0;
+    }
+
+    .hero-title {
+        font-size: 26px;
+        padding: 0 10px;
+    }
+
+    .search-bar-wrapper {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .search-input {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    /* Cards 1 coluna */
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product-card {
+        padding: 25px;
+    }
+
+    .product-icon-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Modal */
     .cart-content {
         max-width: 95%;
         padding: 15px;
     }
-}
 
-@media (max-width: 480px) {
-    .cart-content {
-        max-width: 95%;
-        padding: 15px;
+    #checkout-btn,
+    #continue-btn,
+    #return-to-hub-btn,
+    #save-address-btn {
+        font-size: 13px; 
     }
-.cart-footer .btn-secondary {
-    padding: 8px 12px;
-    border-radius: 8px;
-    background: linear-gradient(to right, #007BFF, #00CFFF);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.cart-footer .btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 196, 167, 0.4);
-}
-
-}
 }
